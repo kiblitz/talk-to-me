@@ -55,3 +55,22 @@
 # for (i, j) in [(1, 2), (2, 4)]:
 #   pass
 #
+# def function_name(a, b, c):
+#   a = a + b
+#   return a + b + c # a + b + c + b
+
+# create database.db file with appropriate tables and columns
+def create_database():
+  pass
+
+# add a user to the user table of database.db
+def add_user(username, first, last, email, password):
+  pass
+
+# returns true if password matches password with login matching either username or email; else false
+def confirm_login(login, password)
+  pass
+
+# dont do yet
+#def add_entry(user_id, entry_audio, 
+
