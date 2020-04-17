@@ -59,18 +59,49 @@
 #   a = a + b
 #   return a + b + c # a + b + c + b
 
+import sqlite3
+
+conn = sqlite3.connect('database.db')
+c = conn.cursor()
+uid = 0
+
 # create database.db file with appropriate tables and columns
 def create_database():
-  pass
+  c.execute("CREATE TABLE users (user_id PRIMARY KEY, first_name, last_name, email, username, password, entry_count)")
+  c.execute("CREATE TABLE entries (entry_id PRIMARY KEY, timestamp, user_id, version)")
 
 # add a user to the user table of database.db
-def add_user(username, first, last, email, password):
-  pass
+def add_user(first, last, email, username, password):
+    global uid
+    uid += 1
+    info = (uid, first, last, email, username, password, 0)
+    c.execute('INSERT INTO users VALUES (?,?,?,?,?,?,?)', info)
+# testing function
+# add_user("sal", "vulcano", "sal@gmail.com", "fatsal", "jokers123")
 
 # returns true if password matches password with login matching either username or email; else false
-def confirm_login(login, password)
-  pass
+def confirm_login(login, password):
+    t = (login, login)
+    c.execute("SELECT * FROM users WHERE username=? OR email=?", t)
+    result = c.fetchone()
+    print(result)
+    try:
+        if login == result[3] or login == result[4]:
+            if password == result[5]:
+                print("loading...")
+                return True
+            else:
+                print("incorrect password")
+                return False
+    except:
+        print("incorrect login")
+        return False
+# testing function
+# confirm_login("fatsal", "jokers123")
+
 
 # dont do yet
 #def add_entry(user_id, entry_audio, 
 
+conn.commit()
+conn.close()
