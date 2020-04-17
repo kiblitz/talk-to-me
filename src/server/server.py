@@ -69,6 +69,7 @@ uid = 0
 def create_database():
   c.execute("CREATE TABLE users (user_id PRIMARY KEY, first_name, last_name, email, username, password, entry_count)")
   c.execute("CREATE TABLE entries (entry_id PRIMARY KEY, timestamp, user_id, version)")
+  c.execute("CREATE TABLE login_auth (activation_id PRIMARY KEY, user_id, expiration_timestamp)")
 
 # add a user to the user table of database.db
 def add_user(first, last, email, username, password):
